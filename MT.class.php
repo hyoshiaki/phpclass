@@ -47,6 +47,24 @@ class MT{
    }
  }
 
+ function rebuildEntry($entryId){
+   $endpoint = "/v3/publish/entries?ids=";
+
+   $header = array(
+    'X-MT-Authorization: MTAuth accessToken=' . $token,
+);
+
+$options = array('http' => 
+    array(
+        'method' => 'GET',
+        'header' => $header,
+        'content' => http_build_query($postdata),
+    )
+);
+
+$response = file_get_contents($api, false, stream_context_create($options));
+ }
+
  function postEntry($siteid,$postdata){
    $endpoint =  "/v3/sites/{$siteid}/entries";
 
